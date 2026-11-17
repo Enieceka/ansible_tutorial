@@ -1,18 +1,20 @@
-- name: Unlock Ubuntu appearance settings
+---
+- name: Configure Ubuntu appearance
   hosts: Ubuntu
   become: true
 
   tasks:
-    - name: Remove light mode configuration
-      ansible.builtin.file:
-        path: /etc/dconf/db/local.d/00-light-mode
-        state: absent
-
-    - name: Remove light mode lock
-      ansible.builtin.file:
-        path: /etc/dconf/db/local.d/locks/light-mode
-        state: absent
+    - name: Set Ubuntu to light mode
+      ansible.builtin.copy:
+        dest: /etc/dconf/db/local.d/01-dark-mode
+        content: |
+          [org/gnome/desktop/interface]
+          color-scheme='prefer-light'
+        owner: root
+        group: root
+        mode: '0644'
 
     - name: Update dconf database
-      ansible.builtin.command: dconf update
+      ansible.builtin.command:
+        cmd: dconf update
       changed_when: true
