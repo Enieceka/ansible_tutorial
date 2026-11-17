@@ -1,10 +1,13 @@
 ---
-
 - name: Install workstation applications
+  hosts: Ubuntu
   become: true
-  ansible.builtin.apt:
-    name:
-      - keepassxc-full
-      - 7zip
-    state: present
-    update_cache: true
+
+  tasks:
+    - name: Install KeePassXC and 7-Zip
+      ansible.builtin.apt:
+        name:
+          - keepassxc-full
+          - 7zip
+        state: present
+        update_cache: true
