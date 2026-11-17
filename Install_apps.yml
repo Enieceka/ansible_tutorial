@@ -9,5 +9,7 @@
         name:
           - keepassxc-full
           - 7zip
+          - gimp
+          - audacity
         state: present
         update_cache: true
