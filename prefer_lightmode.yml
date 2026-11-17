@@ -1,12 +1,9 @@
 ---
-- name: Configure Ubuntu wallpaper
+- name: Configure Ubuntu workstation
   hosts: Ubuntu
   become: true
 
   tasks:
-    - name: Set default Ubuntu wallpaper
-      become: false
-      ansible.builtin.dconf:
-        key: "/org/gnome/desktop/background/picture-uri"
-        value: "'file:///usr/share/backgrounds/warty-final-ubuntu.png'"
-        state: present
+    - name: Set workstation hostname
+      ansible.builtin.hostname:
+        name: workstation-01
