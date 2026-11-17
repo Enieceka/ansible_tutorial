@@ -1,7 +1,12 @@
-- name: Set default Ubuntu wallpaper
-  become: false
-  ansible.builtin.command:
-    cmd: >
-      gsettings set org.gnome.desktop.background picture-uri
-      'file:///usr/share/backgrounds/ubuntu-wallpaper-d.png'
-  changed_when: true
+---
+- name: Configure Ubuntu wallpaper
+  hosts: Ubuntu
+  become: true
+
+  tasks:
+    - name: Set default Ubuntu wallpaper
+      become: false
+      ansible.builtin.dconf:
+        key: "/org/gnome/desktop/background/picture-uri"
+        value: "'file:///usr/share/backgrounds/warty-final-ubuntu.png'"
+        state: present
