@@ -9,7 +9,7 @@
         dest: /etc/dconf/db/local.d/01-dark-mode
         content: |
           [org/gnome/desktop/interface]
-          color-scheme='prefer-light'
+          color-scheme='prefer-dark'
         owner: root
         group: root
         mode: '0644'
