@@ -4,7 +4,7 @@
   become: true
 
   tasks:
-    - name: Install KeePassXC and 7-Zip
+    - name: Install apps
       ansible.builtin.apt:
         name:
           - keepassxc-full
