@@ -6,4 +6,4 @@
   tasks:
     - name: Set workstation hostname
       ansible.builtin.hostname:
-        name: workstation-01
+        name: DNB_DEMO_001
