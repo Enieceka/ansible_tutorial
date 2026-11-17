@@ -1,52 +1,7 @@
----
-- name: Force Ubuntu light mode
-  hosts: Ubuntu
-  become: true
-
-  tasks:
-    - name: Install dconf tools
-      ansible.builtin.apt:
-        name: dconf-cli
-        state: present
-
-    - name: Configure dconf user profile
-      ansible.builtin.copy:
-        dest: /etc/dconf/profile/user
-        content: |
-          user-db:user
-          system-db:local
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: Create dconf configuration directory
-      ansible.builtin.file:
-        path: /etc/dconf/db/local.d
-        state: directory
-        mode: '0755'
-
-    - name: Force light mode
-      ansible.builtin.copy:
-        dest: /etc/dconf/db/local.d/00-light-mode
-        content: |
-          [org/gnome/desktop/interface]
-          color-scheme='prefer-light'
-          gtk-theme='Yaru'
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: Lock light mode settings
-      ansible.builtin.copy:
-        dest: /etc/dconf/db/local.d/locks/light-mode
-        content: |
-          /org/gnome/desktop/interface/color-scheme
-          /org/gnome/desktop/interface/gtk-theme
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: Update dconf database
-      ansible.builtin.command:
-        cmd: dconf update
-      changed_when: true
+- name: Set default Ubuntu wallpaper
+  become: false
+  ansible.builtin.command:
+    cmd: >
+      gsettings set org.gnome.desktop.background picture-uri
+      'file:///usr/share/backgrounds/ubuntu-wallpaper-d.png'
+  changed_when: true
