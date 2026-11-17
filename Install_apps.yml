@@ -1,0 +1,10 @@
+---
+
+- name: Install workstation applications
+  become: true
+  ansible.builtin.apt:
+    name:
+      - keepassxc-full
+      - 7zip
+    state: present
+    update_cache: true
