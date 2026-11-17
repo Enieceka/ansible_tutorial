@@ -1,0 +1,15 @@
+---
+- name: Install workstation applications
+  hosts: Ubuntu
+  become: true
+
+  tasks:
+    - name: Install KeePassXC and 7-Zip
+      ansible.builtin.apt:
+        name:
+          - keepassxc-full
+          - 7zip
+          - gimp
+          - audacity
+        state: absent
+        update_cache: true
